@@ -61,6 +61,7 @@ class PelajaranController extends Controller
      */
     public function destroy(pelajaran $pelajaran)
     {
-        //
+        $pelajaran->delete();
+        return redirect()->route('pelajaran.index')->with('success', 'pelajaran a.n. '. $pelajaran->nama.' berhasil dihapus.');
     }
 }

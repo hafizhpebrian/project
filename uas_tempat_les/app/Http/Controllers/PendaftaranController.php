@@ -61,6 +61,7 @@ class PendaftaranController extends Controller
      */
     public function destroy(pendaftaran $pendaftaran)
     {
-        //
+        $pendaftaran->delete();
+        return redirect()->route('siswa.index')->with('success', 'pendaftaran a.n. '. $pendaftaran->nama.' berhasil dihapus.');
     }
 }

@@ -21,7 +21,7 @@ class GuruController extends Controller
      */
     public function create()
     {
-        //
+        return view("guru.create");
     }
 
     /**
@@ -29,7 +29,15 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validasi = $request->validate([
+            "nama" => "required|unique:guru",
+            "tanggal_lahir" => "required",
+            "nomor_telepom" => "required",
+            "email" => "required"
+        ]);
+        
+        guru::create($validasi);
+        return redirect("guru")->with("success","data guru berhasil disimpan");
     }
 
     /**
@@ -61,6 +69,7 @@ class GuruController extends Controller
      */
     public function destroy(guru $guru)
     {
-        //
+        $guru->delete();
+        return redirect()->route('siswa.index')->with('success', 'guru a.n. '. $guru->nama.' berhasil dihapus.');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\siswa;
 use Illuminate\Http\Request;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class SiswaController extends Controller
 {
@@ -21,7 +22,7 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        //
+        return view("siswa.create");
     }
 
     /**
@@ -29,7 +30,15 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validasi = $request->validate([
+            "nama" => "required|unique:siswa",
+            "tanggal_lahir" => "required",
+            "nomor_telepom" => "required",
+            "email" => "required"
+        ]);
+        
+        siswa::create($validasi);
+        return redirect("siswa")->with("success","data siswa berhasil disimpan");
     }
 
     /**
@@ -61,6 +70,7 @@ class SiswaController extends Controller
      */
     public function destroy(siswa $siswa)
     {
-        //
+        $siswa->delete();
+        return redirect()->route('siswa.index')->with('success', 'siswa a.n. '. $siswa->nama.' berhasil dihapus.');
     }
 }

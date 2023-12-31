@@ -61,6 +61,7 @@ class KategoriController extends Controller
      */
     public function destroy(kategori $kategori)
     {
-        //
+        $kategori->delete();
+        return redirect()->route('siswa.index')->with('success', 'siswa a.n. '. $kategori->nama.' berhasil dihapus.');
     }
 }
