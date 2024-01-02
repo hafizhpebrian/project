@@ -36,8 +36,8 @@ class SiswaController extends Controller
             "nomor_telepom" => "required",
             "email" => "required"
         ]);
-        
         siswa::create($validasi);
+
         return redirect("siswa")->with("success","data siswa berhasil disimpan");
     }
 
@@ -52,17 +52,25 @@ class SiswaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(siswa $siswa)
+    public function edit($id)
     {
-        //
+        $siswa = siswa::find($id);
+        return view("siswa.edit")->with("siswa", $siswa);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, siswa $siswa)
+    public function update(Request $request, $id)
     {
-        //
+        $validasi = $request->validate([
+            "nama"=>"required",
+            "tanggal_lahir" => "required",
+            "nomor_telepom" => "required",
+            "email" => "required"
+        ]);
+        siswa::find($id)->update($validasi);
+        return redirect('siswa')->with('success','data fakultas berhasil diubah');
     }
 
     /**

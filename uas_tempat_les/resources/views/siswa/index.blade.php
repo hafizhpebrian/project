@@ -26,7 +26,7 @@
                         <td>
                             <div class="d-flex justify-content">
                                 <a href="{{ route('siswa.edit', $item->id) }}">
-                                    <button class="btn btn-danger btn-sm show_confirm">edit</button>
+                                    <button class="btn btn-primary btn-sm">edit</button>
                                 </a>
                             <form method="POST" action="{{ route('siswa.destroy', $item->id) }}">
                                 @method('delete')
